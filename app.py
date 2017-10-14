@@ -14,6 +14,9 @@ app = Flask(__name__)
 def start():
     return render_template('index.html')
 
+@app.route('/test')
+def starting():
+    return render_template('test.html')
 @app.route('/api/search')
 def search():
     return render_template('form.html')
