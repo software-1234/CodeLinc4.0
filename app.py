@@ -18,6 +18,7 @@ client = Client(account_sid, auth_token)
 
 #import api_yelp
 #import parse
+import database
 app = Flask(__name__)
 
 
@@ -36,4 +37,6 @@ def starting():
 @app.route('/api/search')
 def search():
     return render_template('form.html')
-
+@app.route('/db')
+def starter():
+    return database.get_db()
