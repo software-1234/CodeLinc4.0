@@ -7,6 +7,7 @@ from flask import json,Flask,render_template,request,jsonify
 
 #import api_yelp
 #import parse
+import database
 app = Flask(__name__)
 
 
@@ -20,4 +21,6 @@ def starting():
 @app.route('/api/search')
 def search():
     return render_template('form.html')
-
+@app.route('/db')
+def starter():
+    return database.get_db()
