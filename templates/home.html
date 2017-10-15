@@ -6,8 +6,15 @@
 
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link href="{{ url_for('static',filename='css/materialize.css')}}" type="text/css" rel="stylesheet" media="screen,projection"/>
-  <link href="{{ url_for('static',filename='css/style.css')}}" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="{{ url_for('static',filename='css/home.css')}}" type="text/css" rel="stylesheet" media="screen,projection"/>
   <link href="https://fonts.googleapis.com/css?family=Press+Start+2P|Macondo|Lato|Indie+Flower|Shadows+Into+Light|Ruda|Source+Sans+Pro" rel="stylesheet">
+
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maps.googleapis.com/maps/api/js"></script>
+  <script src="https://chadkillingsworth.github.io/geolocation-marker/geolocation-marker.js"></script>
+  <script src="{{ url_for('static',filename='js/materialize.js')}}"></script>
+  <script src="{{ url_for('static',filename='js/map.js')}}"></script>
 
 <style>
 </style>
@@ -21,17 +28,13 @@
   </nav>
 
     <h1 class="header center">Guilford Food Network</h1>
-
     <h4 class="header center">Feeding Guilford County</h4>
   <br>
   <h3>Our Mission</h3>
   <h5>To ensure food security too all residents of Guilford county.</h5>
 
   <h3>Programs Near You</h3>
-
-  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-  <script src="{{ url_for('static',filename='js/materialize.js')}}"></script>
-  <script src=""{{ url_for('static',filename='js/init.js')}}""></script>
+  <div id="map_canvas"></div>
 
 </body>
 </html>
