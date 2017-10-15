@@ -14,6 +14,7 @@
   <script src="https://chadkillingsworth.github.io/geolocation-marker/geolocation-marker.js"></script>
   <script src="{{ url_for('static',filename='js/materialize.js')}}"></script>
   <script src="{{ url_for('static',filename='js/map.js')}}"></script>
+  <link href="https://fonts.googleapis.com/css?family=Shadows+Into+Light" rel="stylesheet">
 
 <style>
 input[type=text]{
@@ -64,7 +65,6 @@ p{
   padding-right: 30px;
   text-align: center;
 }
-
 .material-icons{
   font-size: 30px;
 }
@@ -72,11 +72,14 @@ p{
 .transparentBox{
   background-color: grey;
   border: 1px solid grey;
-  opacity: 0.6 !important;
+  background: rgba(128, 128, 128, 0.6);
 }
 
-.opaqueText{
-  opacity: 1.0;
+.transparentBoxTwo{
+  background-color: grey;
+  border: 1px solid black;
+  background: rgba(128, 128, 128, 0.6);
+
 }
 
 #mapStuff{
@@ -85,7 +88,23 @@ p{
 }
 #head{
   text-align: center;
+  background-color: #2e7d32;
+  padding-top: 14px;
+  padding-bottom: 14px;
+  color: white;
 }
+#logoFont{
+  font-family: 'Shadows Into Light';
+  padding-right: 10px;
+}
+#lowerText{
+  margin-top: 150px;
+}
+#rightText{
+  margin-left: 200px;
+  margin-top: 80px;
+}
+
 </style>
 </head>
 
@@ -94,7 +113,7 @@ p{
 <!-- Navigation Bar -->
 <nav class="green darken-3">
   <div class="nav-wrapper">
-    <a href="#" class="brand-logo right">GFN</a>
+    <a href="#" class="brand-logo right" id="logoFont">GFN</a>
     <ul id="nav-mobile" class="left hide-on-med-and-down">
       <li><a href="home.html">Home</a></li>
       <li><a href="/">Organizations</a></li>
@@ -109,22 +128,24 @@ p{
      <li>
        <img src="https://www.azernews.az/media/pictures/lazy-parents-create-happier-children.jpg">
        <div class="caption center-align transparentBox">
-         <h2 class="opaqueText">Guildford Food Network</h2>
-         <h5 class="light grey-text text-lighten-3 opaqueText">Feeding Guilford County</h5>
+         <h2>Guilford Food Network</h2>
+         <h5 class="light grey-text text-lighten-3 ">Feeding Guilford County</h5>
        </div>
      </li>
      <li>
       <img src="http://i.huffpost.com/gen/1600476/images/o-HAPPY-CHILD-facebook.jpg">
-      <div class="caption right-align transparentBox">
-        <h2 class="opaqueText">Make A Difference</h2>
-        <h5 class="light grey-text text-lighten-3 opaqueText">Here's our small slogan.</h5>
+      <div class="caption center-align transparentBoxTwo" id="rightText">
+        <h2>Make A Difference</h2>
+        <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
       </div>
     </li>
     <li>
      <img src="http://cdn.skim.gs/images/v1/msi/r63jbooxlqsov4y0dhzy/Teaching-kids-how-to-make-friends-at-school">
-     <div class="caption center-align transparentBox">
-       <h2 class="opaqueText">Make A Difference</h2>
-       <h5 class="light grey-text text-lighten-3 opaqueText">Here's our small slogan.</h5>
+     <div class="caption center-align transparentBox" id="lowerText">
+       <h2>Collect/Reclaim/Distribute</h2>
+       <!--
+       <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
+     -->
      </div>
    </li>
    </ul>
@@ -150,12 +171,12 @@ $(document).ready(function(){
 </script>
 -->
 
-<!-- Seperator - use grid?? -->
+<!-- Seperator -->
 <div class="separator">
   <div class="row">
     <div class="col s6 push-s6"><span class="flow-text"><i class="material-icons">local_grocery_store</i>
       <h3>Our Strategies</h3>
-      <p>Food dollection, reclaimation, and<br>distribution in Guilford County</p>
+      <p>Food collection, reclaimation, and<br>distribution in Guilford County</p>
     </div>
     <div class="col s6 pull-s6"><span class="flow-text"><i class="material-icons">wb_incandescent</i>
       <h3>Mission Statement</h3>
@@ -163,7 +184,8 @@ $(document).ready(function(){
     </div>
   </div>
 </div>
-<br>
+
+
 <h3 id="head">Near You</h3>
 
 <div class="container" id="mapStuff">
