@@ -1,18 +1,19 @@
 /** Styling related to homepage here **/
-#map_canvas { 
+#map_canvas {
   overflow: hidden;
-  width: 500px;
   height: 500px;
+  width: 100%;
+  text-align: center;
 }
 /*
-#wrapper { 
+#wrapper {
   overflow: hidden;
   height: 100%;
   width: 100%;
 }
 
 #bed_view {
-  float: left; 
+  float: left;
   min-width: 250px;
   height: 92%;
   overflow: auto;
@@ -20,13 +21,13 @@
 }
 
 @media screen and (max-width: 450px) {
-	#bed_view { 
+	#bed_view {
 		float: none;
 		margin-right: 0;
 		width: auto;
 		min-width: 0;
 		border: 0;
-		border-bottom: 2px solid #000;   
+		border-bottom: 2px solid #000;
 		height: 30%;
 	}
 	#map_canvas {
