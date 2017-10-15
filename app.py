@@ -48,11 +48,11 @@ def get():
 @app.route('/sms', methods=['POST'])
 def text():
     response = MessagingResponse()
-    replyText = message_maker.getReply(request.form['Body'])
+    replyText = message_maker.getReply(request.form['Body'], request.form['from'])
     response.message(replyText)
-    print('hi')
     return str(response)
-@app.route('/lat')
-def lat():
-    response = distance.getDistance()
-    return 'hi'
+
+@app.route('/api/test')
+def test_distance():
+    replyText = message_maker.getReply("food pantry near home", 19195251997)
+    return replyText
