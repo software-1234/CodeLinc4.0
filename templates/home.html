@@ -9,7 +9,6 @@
   <link href="{{ url_for('static',filename='css/home.css')}}" type="text/css" rel="stylesheet" media="screen,projection"/>
   <link href="https://fonts.googleapis.com/css?family=Press+Start+2P|Macondo|Lato|Indie+Flower|Shadows+Into+Light|Ruda|Source+Sans+Pro" rel="stylesheet">
 
-
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <script src="https://maps.googleapis.com/maps/api/js"></script>
   <script src="https://chadkillingsworth.github.io/geolocation-marker/geolocation-marker.js"></script>
@@ -17,24 +16,78 @@
   <script src="{{ url_for('static',filename='js/map.js')}}"></script>
 
 <style>
+input[type=text]{
+  width: 75%;
+  border: 2px solid;
+  font-size: 32px;
+  color: black;
+}
+.container-1 input#search{
+  width: 75%;
+  height: 50px;
+  border: 2px solid #1b5e20;
+  font-size: 24px;
+  float: left;
+  color: black;
+  padding-left: 20px;
+  border-radius: 5px;
+}
+input::placeholder {
+  color: black;
+}
 </style>
 
 </head>
 
-<body class="blue-grey lighten-4">
-  <nav class="green darken-4" role="navigation">
-    <a href="/">Home</a>
-    <a href="/">Programs</a>
-  </nav>
+<body class="blue-grey lighten-5">
 
-    <h1 class="header center">Guilford Food Network</h1>
-    <h4 class="header center">Feeding Guilford County</h4>
-  <br>
+<!-- Navigation Bar -->
+<nav class="green darken-3">
+  <div class="nav-wrapper">
+    <a href="#" class="brand-logo right">GFN</a>
+    <ul id="nav-mobile" class="left hide-on-med-and-down">
+      <li><a href="home.html">Home</a></li>
+      <li><a href="/">Organizations</a></li>
+      <li><a href="/">Get Involved</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Hero Image -->
+<div class="slider">
+   <ul class="slides">
+     <li>
+       <img src="http://i.huffpost.com/gen/1600476/images/o-HAPPY-CHILD-facebook.jpg">
+       <div class="caption right-align">
+         <h3>Guildford Food Network</h3>
+         <h5 class="light grey-text text-lighten-3">Feeding Guilford County</h5>
+       </div>
+     </li>
+   </ul>
+ </div>
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('.slider').slider();
+  });
+</script>
+
   <h3>Our Mission</h3>
   <h5>To ensure food security too all residents of Guilford county.</h5>
 
-  <h3>Programs Near You</h3>
+  <h3>Near You</h3>
+
+  <form>
+    <div class="input-field">
+      <input id="search" type="search" required>
+      <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+      <i class="material-icons">close</i>
+    </div>
+  </form>
+
+<!-- Map -->
   <div id="map_canvas"></div>
+  <br>
+</div>
 
 </body>
 </html>
