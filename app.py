@@ -37,6 +37,10 @@ def starting():
 @app.route('/api/search')
 def search():
     return render_template('form.html')
-@app.route('/db')
-def starter():
-    return database.get_db()
+
+
+@app.route('/api/locations')
+def get():
+    response =  database.get_valid_locations()
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    return response

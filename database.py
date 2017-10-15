@@ -1,30 +1,24 @@
 import sqlite3
 
-from flask import g
+from flask import g, jsonify
 
-DATABASE = '/db/main.db'
-
-def print_hi():
-    return "hi"
-def get_db(): 
+def get_valid_locations(): 
     conn =  sqlite3.connect('main.db')
-    #db = getattr(g, '_database', None)
-    #if db is None:
-    #    db = g._database = sqlite3.connect(DATABASE)
-    print("Opened database successfully")
-    #return conn
     cur = conn.cursor()
-    print("created cursor")
     cur.execute(""" select * from locations L
-    where L.Address not in
-    (select L2.Address from locations L2
-    where L2.Address = ''""")
-    for row in cur:
-        print(row)
-    return 'hi'
+                    where L.Address not in
+                    (select L2.Address from locations L2
+                    where L2.Address = '')""")
+    res = cur.fetchall()
+    return jsonify(res)
 
-#@app.teardown_appcontext
-#def close_connection(exception):
-#    db = getattr(g, '_database', None)
-#    if db is not None:
-#        db.close()
+'''
+def get_db():
+    DATABASE = 'main.db'
+    con = sqlite3.connect(DATABASE)
+    cur = con.cursor()
+    print("Opened database successfully")
+    cur.execute(""" select * from locations L""").fetchall()
+    res = cur.fetchall()
+    return res
+'''
