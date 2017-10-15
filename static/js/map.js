@@ -58,59 +58,74 @@ function initialize() {
 			var mapZoom = 19;
 			
 			console.log(data);
-			for (var i = 0; i < data.length; i++) {
+			data.forEach(function(d) {
+				var location_obj = {}
 				//render coordinates
-				var name = data[i][0];
-				var foodSystemElement = data[i][1];
-				var typeOfResource = data[i][2];
-				var website = data[i][3];
-				var contactName = data[i][4];
-				var email = data[i][5];
-				var phone = data[i][6];
-				var address = data[i][7];
-				var city = data[i][8];
-				var state = data[i][9];
-				var zip = data[i][10];
-				var provider = data[i][13];
-				var comments = data[i][14];
-				var ebt = data[i][15];
-				console.log(name + ", " + typeOfResource);
-				/*
-				location = 
+				location_obj["id"] = d[0]
+				location_obj["name"] = d[1];
+				location_obj["foodSystemElement"] = d[2];
+				location_obj["typeOfResource"] = d[3];
+				location_obj["website"] = d[4];
+				location_obj["contactName"] = d[5];
+				location_obj["email"] = d[6];
+				location_obj["phone"] = d[7];
+				location_obj["address"] = d[8];
+				location_obj["city"] = d[9];
+				location_obj["state"] = d[10];
+				location_obj["zip"] = d[11];
+				location_obj["daysOfOperation"] = d[12];
+				location_obj["hoursOfOperation"] = d[13];
+				location_obj["provider"] = d[14];
+				location_obj["comments"] = d[15];
+				location_obj["ebt"] = d[16];
+				location_obj["lat"] = parseFloat(d[17]);
+				location_obj["lng"] = parseFloat(d[18]);
+				console.log(location_obj["name"] + ", " + location_obj["typeOfResource"]);
 				
-				var marker = new google.maps.Marker({
-					id: "marker"+bedID,
-					position: location,
-					map: map,
-					title: name
-				});
-				//add to marker list for referencing in click events
-				markers.push(marker);
+				var lat = location_obj["lat"];
+				var lng = location_obj["lng"];
+				if(location_obj["lat"] && location_obj["lng"]){
+					console.log(location_obj["lat"],location_obj["lng"]);
+					console.log(lat + " " + lng + " (types: " + (typeof lat) + ", " + (typeof lng) + ")")
+					//location =  new google.maps.LatLng(location_obj["lat"],location_obj["lng"]);
+				
+					var marker = new google.maps.Marker({
+						id: "marker"+location_obj["id"],
+						position: {lat: lat, lng: lng},
+						map: map,
+						title: location_obj["name"]
+						//icon: ,
+					});
+					//add to marker list for referencing in click events
+					markers.push(marker);
 
-				//zoom into marker on click and open infoWindow
-				google.maps.event.addListener(marker, 'click', function() {
-					var num = this.id.substr(this.id.length -1);
-					map.setZoom(mapZoom);
-					map.panTo(this.getPosition());
-					getInfoWindowEvent(marker, bedName, bedID, latitude, longitude);
-				});
-				/*
-				var location = new google.maps.LatLng(latitude, longitude);
-				var marker = new google.maps.Marker({
-					id: "marker"+i,
-					position: location,
-					map: map,
-					title: bedName
-				});
-				markers.push(marker);
-				google.maps.event.addListener(marker, 'click', function() {
-					map.setZoom(mapZoom);
-					map.panTo(this.getPosition());
-				});
-				console.log(bedName);
-				//render table
-				*/
-			}
+					//zoom into marker on click and open infoWindow
+					google.maps.event.addListener(marker, 'click', function() {
+						var num = this.id.substr(this.id.length -1);
+						map.setZoom(mapZoom);
+						map.panTo(this.getPosition());
+						getInfoWindowEvent(marker, location_obj);
+					});
+					/*
+					var location = new google.maps.LatLng(latitude, longitude);
+					var marker = new google.maps.Marker({
+						id: "marker"+i,
+						position: location,
+						map: map,
+						title: bedName
+					});
+					markers.push(marker);
+					google.maps.event.addListener(marker, 'click', function() {
+						map.setZoom(mapZoom);
+						map.panTo(this.getPosition());
+					});
+					console.log(bedName);
+					//render table
+					*/
+				}				
+				
+				
+			});
 		},
 		error: function(jqxhr, status, data) {
 			console.log(jqxhr.reponseText);
@@ -119,11 +134,17 @@ function initialize() {
 }
 
 
-function getInfoWindowEvent(marker, bedName, bedID, latitude, longitude) {
+function getInfoWindowEvent(marker, l) {
     infowindow.close()
-	infowindowContentString = '<div><p>'+ bedName +' Garden <br/><span id="link'+bedID+'" class="link">Open Information</span></p><a href="https://www.google.com/maps/?q='+latitude+','+longitude+'">Open in Google Maps</a></p><div>';
-    $(document).off('click', '#link'+bedID);
-    $(document).on('click', '#link'+bedID, function() {loadBed(bedID);});
+	infowindowContentString = '<div><p>'+ l['name'] +' <br/></p>';
+	if(l["phone"]){
+		infowindowContentString += l['phone'] +' <br/>';
+	}
+	if(l["website"]){
+		infowindowContentString += l['website'] +' <br/>';
+	}
+	
+	infowindowContentString += '<a href="https://www.google.com/maps/?q='+l['lat']+','+l['lng']+'">Open in Google Maps</a></p><div>';
     infowindow.setContent(infowindowContentString);
     infowindow.open(map, marker);
 }
@@ -157,7 +178,7 @@ function CenterControl(controlDiv, map) {
 
 	// Setup the click event listeners: simply set the map to Chicago.
 	controlUI.addEventListener('click', function() {
-		infowindow.close();
+		//infowindow.close();
 		map.panTo(centerPosition);
 		map.setZoom(defaultZoom);
 	});
