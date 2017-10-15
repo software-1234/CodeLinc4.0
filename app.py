@@ -38,7 +38,9 @@ def starting():
 @app.route('/api/search')
 def search():
     return render_template('form.html')
-
+@app.route('/organization')
+def searching():
+    return render_template('organizations.html')
 
 @app.route('/api/locations')
 def get():
