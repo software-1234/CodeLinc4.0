@@ -8,7 +8,8 @@ from flask import json,Flask,render_template,request,jsonify
 from twilio.twiml.messaging_response import MessagingResponse, Message
 from twilio.rest import Client
 import urllib
-
+import distance
+import message_maker
 # Your Account SID from twilio.com/console
 account_sid = "AC08eb1bfb20fe3819d6fc89edd0519f6d"
 # Your Auth Token from twilio.com/console
@@ -44,3 +45,14 @@ def get():
     response =  database.get_valid_locations()
     response.headers.add('Access-Control-Allow-Origin', '*')
     return response
+@app.route('/sms', methods=['POST'])
+def text():
+    response = MessagingResponse()
+    replyText = message_maker.getReply(request.form['Body'])
+    response.message(replyText)
+    print('hi')
+    return str(response)
+@app.route('/lat')
+def lat():
+    response = distance.getDistance()
+    return 'hi'
