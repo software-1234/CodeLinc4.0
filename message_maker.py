@@ -39,12 +39,12 @@ def getReply(message, from_number):
         print(catagory)
         
         answer = "Closest "+ result[1][3] +" is "+result[1][1]+" on "+result[1][8]+", "+result[1][9]+". "
-        if result[1][7] != "":
-            answer += "Phone # is " +str(result[1][7]) + ". "
-        if result[1][12] != "":
-            answer += "Open on " +str(result[1][12]) + " "
-        if result[1][12] != "":
-            answer += " " +str(result[1][13])
+#        if result[1][7] != "":
+#            answer += "Phone # is " +str(result[1][7]) + ". "
+#        if result[1][12] != "":
+#            answer += "Open on " +str(result[1][12]) + " "
+#        if result[1][12] != "":
+#            answer += " " +str(result[1][13])
     else:
         answer = "please try another question?"
     return answer

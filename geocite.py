@@ -14,7 +14,7 @@ with sqlite3.connect('main.db') as conn:
     res = cur.fetchall()
     print(len(res))
     url = 'https://maps.googleapis.com/maps/api/geocode/json'
-    for i in range(0,1):
+    for i in range(1,2):
         print(i)
         print(res[i])
         id = res[i][0]

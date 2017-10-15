@@ -25,19 +25,12 @@ app = Flask(__name__)
 
 @app.route('/')
 def start():
-    return render_template('index.html')
-
-@app.route('/test')
-def starting_test():
-    return render_template('test.html')
-
-@app.route('/home')
-def starting():
     return render_template('home.html')
-    
+
 @app.route('/api/search')
 def search():
     return render_template('form.html')
+
 @app.route('/organization')
 def searching():
     return render_template('organizations.html')
@@ -50,7 +43,7 @@ def get():
 @app.route('/sms', methods=['POST'])
 def text():
     response = MessagingResponse()
-    replyText = message_maker.getReply(request.form['Body'], request.form['from'])
+    replyText = message_maker.getReply(request.form['Body'], request.form['From'])
     response.message(replyText)
     return str(response)
 
