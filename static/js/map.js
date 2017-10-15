@@ -8,7 +8,7 @@ var infowindow;
 
 function initialize() {
 	centerPosition = new google.maps.LatLng(36.072890, -79.791331)
-	defaultZoom = 15;
+	defaultZoom = 17;
 	infowindow = new google.maps.InfoWindow();
 	
 	var mapOptions = {
@@ -55,7 +55,23 @@ function initialize() {
 		success: function(data, status, jqxhr) {
 			//initilize variables
 			markers = [];
-			var mapZoom = 19;
+			var mapZoom = 17;
+			
+			var loc = window.location.pathname;
+			var dir = loc.substring(0, loc.lastIndexOf('/'));
+			var icons = {
+			  "Food Pantry": '../icons/pantry.png',
+			  "Summer Meals": '../icons/summer-meal.png',
+			  "Educational Resource": '../icons/school.png',
+			  "Free Meal": '../icons/meal.png',
+			  "Convenience Store": '../icons/convenience-store.png',
+			  "Community Garden": '../icons/garden.png',
+			  "BackPack Program": '../icons/backpack.png',
+			  "Grocery/Co-Op": '../icons/grocery.png',
+			  "CSA Program": '../icons/csa.png',
+			  "Mobile Market": '../icons/mobile.png',
+			};
+			
 			
 			console.log(data);
 			data.forEach(function(d) {
@@ -90,11 +106,11 @@ function initialize() {
 					//location =  new google.maps.LatLng(location_obj["lat"],location_obj["lng"]);
 				
 					var marker = new google.maps.Marker({
-						id: "marker"+location_obj["id"],
+						id: location_obj["typeOfResource"]+"_marker"+location_obj["id"],
 						position: {lat: lat, lng: lng},
 						map: map,
 						title: location_obj["name"]
-						//icon: ,
+						//icon: icons[location_obj["typeOfResource"]]
 					});
 					//add to marker list for referencing in click events
 					markers.push(marker);
@@ -126,6 +142,21 @@ function initialize() {
 				
 				
 			});
+			
+			$('#search').keyup(function() {
+				var val = $.trim($(this).val()).replace(/ +/g, ' ').toLowerCase();
+				
+				markers.forEach(function(m) {
+					var text = m.title.replace(/\s+/g, ' ').toLowerCase();
+					var type = m.id.split('_')[0].toLowerCase();
+					console.log(type);
+					m.setVisible(true);
+					if(!~text.indexOf(val) && !~type.indexOf(val)){
+						m.setVisible(false);
+					}
+				})
+			});
+			
 		},
 		error: function(jqxhr, status, data) {
 			console.log(jqxhr.reponseText);
@@ -136,14 +167,19 @@ function initialize() {
 
 function getInfoWindowEvent(marker, l) {
     infowindow.close()
-	infowindowContentString = '<div><p>'+ l['name'] +' <br/></p>';
+	infowindowContentString = '<div><p>'+ l['name'] +'</p>';
+	if(l["website"]){
+		infowindowContentString += '<a href="'+l['website'] +'">Website</a> <br/>';
+	}
 	if(l["phone"]){
 		infowindowContentString += l['phone'] +' <br/>';
+	}	
+	if(l["email"]){
+		infowindowContentString += l['email'] +' <br/>';
 	}
-	if(l["website"]){
-		infowindowContentString += l['website'] +' <br/>';
+	if(l["address"]){
+		infowindowContentString += l['address'] +', '+ l['city'] +', '+ l['state'] +' <br/>';
 	}
-	
 	infowindowContentString += '<a href="https://www.google.com/maps/?q='+l['lat']+','+l['lng']+'">Open in Google Maps</a></p><div>';
     infowindow.setContent(infowindowContentString);
     infowindow.open(map, marker);
