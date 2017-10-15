@@ -15,7 +15,10 @@ def get_db():
     #return conn
     cur = conn.cursor()
     print("created cursor")
-    cur.execute(""" select * from locations L""")
+    cur.execute(""" select * from locations L
+    where L.Address not in
+    (select L2.Address from locations L2
+    where L2.Address = ''""")
     for row in cur:
         print(row)
     return 'hi'
