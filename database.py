@@ -8,8 +8,9 @@ def get_valid_locations():
     cur.execute(""" select * from locations L
                     where L.Address not in
                     (select L2.Address from locations L2
-                    where L2.Address = '')""")
+                    where L2.latitude = '')""")
     res = cur.fetchall()
+    print(res)
     return jsonify(res)
 
 '''
