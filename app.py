@@ -11,9 +11,9 @@ import urllib
 import distance
 import message_maker
 # Your Account SID from twilio.com/console
-account_sid = "AC08eb1bfb20fe3819d6fc89edd0519f6d"
+account_sid = ""
 # Your Auth Token from twilio.com/console
-auth_token  = "8845298236d986236f8ea3ed68f4a1ba"
+auth_token  = ""
 
 client = Client(account_sid, auth_token)
 
