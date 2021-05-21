@@ -39,7 +39,7 @@ rsa==3.4.2
 six==1.10.0
 Slowloris==0.1.4
 SpeechRecognition==3.6.0
-tensorflow==1.1.0
+tensorflow==2.5.0
 twilio==6.8.0
 uritemplate==3.0.0
 urllib3==1.22
